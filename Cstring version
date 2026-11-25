@@ -1,0 +1,33 @@
+// ============================================================
+// ACTIVITY 3: C-STRINGS - READING AND MANIPULATING STRINGS (C VERSION)
+// Learning Outcome: Evaluate C-strings vs std::string (C only has C-strings)
+// ============================================================
+
+#include <stdio.h>
+#include <string.h>  // For strlen, strcpy, strcspn
+
+int main() {
+    // C-string: character array with a fixed maximum size
+    char name[50];
+
+    printf("Enter your name: ");
+    // fgets reads a full line including spaces (max 49 characters)
+    fgets(name, 50, stdin);
+
+    // fgets keeps the newline; replace it with '\0' to end the string cleanly
+    name[strcspn(name, "\n")] = '\0';
+
+    printf("Name: %s\n", name);
+
+    // strlen returns size_t; cast to unsigned long for %lu
+    printf("Length: %lu\n", (unsigned long)strlen(name));
+
+    printf("First character: %c\n", name[0]);
+
+    // Copy the C-string using strcpy
+    char copy[50];
+    strcpy(copy, name);
+    printf("Copy: %s\n", copy);
+
+    return 0;
+}

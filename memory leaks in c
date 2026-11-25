@@ -1,0 +1,47 @@
+// ACTIVITY 3: MEMORY LEAKS (C VERSION)
+#include <stdio.h>
+#include <stdlib.h>
+
+// 3A: allocates memory but never frees it (LEAK)
+void createLeak() {
+    int *ptr = (int*)malloc(sizeof(int));
+
+    if (ptr == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
+
+    *ptr = 42;
+    printf("Inside function. The value is: %d\n", *ptr);
+    printf("Memory allocated at address: %p\n", (void*)ptr);
+
+    // THE LEAK: free(ptr) is never called
+}
+
+// 3B: the fixed version
+void fixLeak() {
+    int *ptr = (int*)malloc(sizeof(int));
+    if (ptr == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
+    *ptr = 42;
+
+    printf("Inside fixed function. Value: %d\n", *ptr);
+
+    free(ptr);     // THE FIX
+    ptr = NULL;    // avoid a dangling pointer
+
+    printf("Memory has been successfully freed.\n");
+}
+
+int main() {
+    printf("--- Demonstrating the Leak ---\n");
+    createLeak();
+    printf("Function finished. The memory is now leaked.\n");
+
+    printf("\n--- Testing the Fix ---\n");
+    fixLeak();
+
+    return 0;
+}

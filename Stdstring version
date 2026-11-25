@@ -1,0 +1,30 @@
+// ============================================================
+// ACTIVITY 3B: STD::STRING VERSION
+// Learning Outcome: Evaluate C-strings vs std::string
+// ============================================================
+
+#include <iostream>
+#include <string>  // For std::string
+using namespace std;
+
+int main() {
+    // std::string: no fixed size needed
+    string name;
+
+    cout << "Enter your name: ";
+    getline(cin, name);  // reads a full line into the string
+
+    cout << "Name: " << name << endl;
+    cout << "Length: " << name.length() << endl;
+    cout << "First character: " << name[0] << endl;
+
+    // Copy using the assignment operator
+    string copy = name;
+    cout << "Copy: " << copy << endl;
+
+    // Concatenate using the + operator
+    string greeting = "Hello, " + name + "!";
+    cout << greeting << endl;
+
+    return 0;
+}
